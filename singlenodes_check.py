@@ -10,11 +10,11 @@ load_dotenv("singlenode_elastics.env")
 for i in range(1,8):
     url = os.getenv("ELASTIC_URL_OLD_{}".format(i))+"/_cluster/health/"
     print(url)
-    url_main_info = os.getenv("ELASTIC_URL_OLD_{}".format(i))+"/"
-    url_cpu_usage = os.getenv("ELASTIC_URL_OLD_{}".format(i))+ "/_cat/nodes?v=true&s=cpu:desc&pretty=true"
-    url_memory_usage = os.getenv("ELASTIC_URL_OLD_{}".format(i))+"/_cat/nodes?v=true&s=ram:desc&pretty=true"
-    indices_url = os.getenv("ELASTIC_URL_OLD_{}".format(i))+"/_cat/indices"
-    cluster_stats_url = os.getenv("ELASTIC_URL_OLD_{}".format(i))+"/_cluster/stats"
+    url_main_info = os.getenv("ELASTIC_URL_test_{}".format(i))+"/"
+    url_cpu_usage = os.getenv("ELASTIC_URL_test_{}".format(i))+ "/_cat/nodes?v=true&s=cpu:desc&pretty=true"
+    url_memory_usage = os.getenv("ELASTIC_URL_test_{}".format(i))+"/_cat/nodes?v=true&s=ram:desc&pretty=true"
+    indices_url = os.getenv("ELASTIC_URL_test_{}".format(i))+"/_cat/indices"
+    cluster_stats_url = os.getenv("ELASTIC_URL_test_{}".format(i))+"/_cluster/stats"
 
     try:
         indexer_es = Elasticsearch([os.getenv("INDEXER_ELASTIC_URL")],
@@ -28,7 +28,7 @@ for i in range(1,8):
         response_dict = response.json()
 
         # todo: variables
-        company_tag = url = os.getenv("ELASTIC_URL_OLD_{}_TAG".format(i))
+        company_tag = url = os.getenv("ELASTIC_URL_test_{}_TAG".format(i))
         timestamp = datetime.now(timezone.utc).isoformat()
         cluster_name = response_dict['cluster_name']
         server_name = response_main_info.json()['name']
